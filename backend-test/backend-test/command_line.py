@@ -1,8 +1,10 @@
 import argparse
 import json
+import sys
 
 
-def main():
+def main(args):
+    print('args', args)
     # Create the parser
     my_parser = argparse.ArgumentParser(description='This program has to filter a list of elements containing a pattern and counts of People and Animals by counting the number of children ')
 
@@ -22,23 +24,35 @@ def main():
     count = args.count
 
     data_filtered =[]
+    list_count = []
+    
+    #Path to the data.json
+    path = "C:\\Users\\tahar\\Desktop\\Backend\\backend\\backend-test\\backend-test\\data.json"
 
     # Python program to read
-    # json file and filter
-    with open('/tmp/data.json') as f:
+    # json file and convert them to list python 
+    with open(path) as f:
         data = json.load(f)
         if Filter:
             data_filtered=[dico for dico in data for dict1 in dico['people'] for animal in dict1['animals'] if Filter in animal['name']]
             if len(data_filtered) != 0:
-                print(data_filtered)
+                return data_filtered
             else:
                 print('There is no aniamls which containing ',Filter,' in theire names')
         elif count:
             for dico in data:
-                print('-',sum(1 for v in dico.values()))
+                children = 0
+                for ele in dico['people']:
+                    animals = len(ele['animals'])
+                    children += 1 + animals
+                    ele['name'] += f" [{animals}]"
+                dico['name'] += f" [{children}]"
+                list_count.append(dico)
+            return list_count
+
         else:
             print('There is no argument suplied, please make -h to see all options')
 
 if __name__ == '__main__':
-    main()
+    print(main(sys.argv[1:]))
 
