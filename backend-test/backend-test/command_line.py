@@ -4,7 +4,6 @@ import sys
 
 
 def main(argv):
-    # print('arg==================>>>>>', argv)
     # Create the parser
     my_parser = argparse.ArgumentParser(description='This program has to filter a list of elements containing a pattern and counts of People and Animals by counting the number of children ')
 
@@ -21,7 +20,6 @@ def main(argv):
     # Execute the parse_args() method
     args = my_parser.parse_args(argv)
     Filter= args.filter
-    # print('============', Filter)
     count = args.count
 
     data_filtered =[]
