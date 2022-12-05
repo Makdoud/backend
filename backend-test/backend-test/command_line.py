@@ -3,8 +3,8 @@ import json
 import sys
 
 
-def main(args):
-    print('args', args)
+def main(argv):
+    # print('arg==================>>>>>', argv)
     # Create the parser
     my_parser = argparse.ArgumentParser(description='This program has to filter a list of elements containing a pattern and counts of People and Animals by counting the number of children ')
 
@@ -19,8 +19,9 @@ def main(args):
 
 
     # Execute the parse_args() method
-    args = my_parser.parse_args()
+    args = my_parser.parse_args(argv)
     Filter= args.filter
+    # print('============', Filter)
     count = args.count
 
     data_filtered =[]
@@ -33,12 +34,14 @@ def main(args):
     # json file and convert them to list python 
     with open(path) as f:
         data = json.load(f)
+        # Filter 
         if Filter:
             data_filtered=[dico for dico in data for dict1 in dico['people'] for animal in dict1['animals'] if Filter in animal['name']]
             if len(data_filtered) != 0:
                 return data_filtered
             else:
                 print('There is no aniamls which containing ',Filter,' in theire names')
+        # Count
         elif count:
             for dico in data:
                 children = 0
