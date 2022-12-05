@@ -4,6 +4,10 @@
 
 - Change the path of data.json in the script command_line.py with /path/to/the/location/of/data.json
 - Launch the script command_line.py by adding options (--filter=ry/ --count)
+```
+python /path/to/command_line.py --filter=ry
+python /path/to/command_line.py --count
+```
 
 ## Tests
 
